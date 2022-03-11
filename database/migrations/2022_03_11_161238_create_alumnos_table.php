@@ -18,7 +18,7 @@ class CreateAlumnosTable extends Migration
             $table->bigIncrements("id");
             $table->bigInteger('categoria_id')->unsigned();
 
-            $table->integer("Carnet");
+            $table->string("Carnet");
             $table->string("FirstName");
             $table->string("SecondName");
             $table->string("LastName");

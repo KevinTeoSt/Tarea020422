@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Alumnos;
+use App\Models\Categorias;
 use App\Models\ModelCategoria;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +17,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        ModelCategoria::factory(1000)->create();
+        User::factory(5)->create();
+        Categorias::factory(20)->create();
+        Alumnos::factory(20)->create();
+
     }
 }
