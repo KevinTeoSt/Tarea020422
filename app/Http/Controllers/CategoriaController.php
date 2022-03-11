@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+
 use Illuminate\Http\Request;
 
+/**
+ * Class CategoriaController
+ * @package App\Http\Controllers
+ */
 class CategoriaController extends Controller
 {
     /**
@@ -14,7 +19,10 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = Categoria::paginate();
+
+        return view('categoria.index', compact('categorias'))
+            ->with('i', (request()->input('page', 1) - 1) * $categorias->perPage());
     }
 
     /**
@@ -24,62 +32,78 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        $categoria = new Categoria();
+
+        return view('categoria.create', compact('categoria'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        request()->validate(Categoria::$rules);
+
+        $categoria = Categoria::create($request->all());
+
+        return redirect()->route('categorias.index')
+            ->with('success', 'Categoria created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Categoria $categoria)
+    public function show($id)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria)
+    public function edit($id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        return view('categoria.edit', compact('categoria'));
     }
+
+
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \Illuminate\Http\Request $request
+     * @param  Categoria $categoria
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Categoria $categoria)
     {
-        //
+        request()->validate(Categoria::$rules);
+
+        $categoria->update($request->all());
+
+        return redirect()->route('categorias.index')->with('success', 'Categoria updated successfully');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Categoria  $categoria
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy(Categoria $categoria)
+    public function destroy($id)
     {
-        //
+        $categoria = Categoria::find($id)->delete();
+
+        return redirect()->route('categorias.index')->with('success', 'Categoria deleted successfully');
     }
 }

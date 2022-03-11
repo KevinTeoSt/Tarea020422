@@ -15,10 +15,10 @@ class CreateAlumnosTable extends Migration
     {
         Schema::create('alumnos', function (Blueprint $table) {
             $table->engine = "InnoDB";
-            $table->string("Carnet")->primary();
-            $table->bigInteger('alumnos_id')->unsigned();
+            $table->bigIncrements("id");
+            $table->bigInteger('categoria_id')->unsigned();
 
-
+            $table->integer("Carnet");
             $table->string("FirstName");
             $table->string("SecondName");
             $table->string("LastName");
@@ -30,6 +30,9 @@ class CreateAlumnosTable extends Migration
             /*Crearé el dato de foto, por si lo llegara a ocupar despues en el curso, pero quedará deshabilidado
             $table->string("Foto");*/
             $table->timestamps();
+
+            $table->foreign('categoria_id')->references('id')->on('categorias');
+
         });
     }
 
