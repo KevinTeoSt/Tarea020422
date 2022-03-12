@@ -17,3 +17,4 @@ class CategoriasSeeder extends Seeder
         Categorias::factory(20)->create();
     }
 }
+#Hola
