@@ -14,8 +14,8 @@ class AlumnosFactory extends Factory
     public function definition()
     {
         return [
-            'categoria_id'=>$this->faker->numberBetween(1,20),
-            'Carnet' =>$this->faker->numberBetween($min = 1, $max = 8),
+            'categoria_id'=>$this->faker->numberBetween(1,3),
+            'Carnet' =>$this->faker->numberBetween($min = 3000111110000, $max = 3500111110000),
             'FirstName' =>$this->faker->name,
             'SecondName'=>$this->faker->firstName,
             'LastName'=>$this->faker->lastName,

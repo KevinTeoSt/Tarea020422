@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -81,9 +82,9 @@
                         </div>
                     @endif
 
-                    <div class="card-body">
+
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table id="example" class="table table-striped table-bordered" >
                                 <thead class="thead">
                                 <tr>
 
@@ -94,17 +95,15 @@
                                     <th>Secondname</th>
                                     <th>Lastname</th>
                                     <th>Dateofbirth</th>
-                                    <th>Address</th>
+                                  <!--  <th>Address</th>-->
                                     <th>Email</th>
-                                    <th>Dpi</th>
+                                  <!--   <th>Dpi</th>-->
                                     <th>Cel</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
-
-
-                                    <th></th>
                                 </tr>
                                 </thead>
+
                                 @foreach ($alumnos as $alumno)
                                     <tr>
 
@@ -115,9 +114,9 @@
                                         <td>{{ $alumno->SecondName }}</td>
                                         <td>{{ $alumno->LastName }}</td>
                                         <td>{{ $alumno->DateOfBirth }}</td>
-                                        <td>{{ $alumno->Address }}</td>
+                                    <!-- <td>{{ $alumno->Address }}</td>-->
                                         <td>{{ $alumno->Email }}</td>
-                                        <td>{{ $alumno->Dpi }}</td>
+                                     <!--   <td>{{ $alumno->Dpi }}</td>-->
                                         <td>{{ $alumno->Cel }}</td>
                                         <td>
                                             <a class="btn btn-sm btn-success" href="{{ route('alumnos.edit',$alumno->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
@@ -125,12 +124,11 @@
                                         </td>
                                         <td>
                                             <form action="{{ route('alumnos.destroy',$alumno->id) }}" method="POST">
-                                                 @csrf
+                                                @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
                                             </form>
                                         </td>
-
                                     </tr>
                                 @endforeach
                             </table>
