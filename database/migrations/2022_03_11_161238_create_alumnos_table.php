@@ -27,8 +27,8 @@ class CreateAlumnosTable extends Migration
             $table->string("Email");
             $table->string("Dpi");
             $table->string("Cel");
-            /*Crearé el dato de foto, por si lo llegara a ocupar despues en el curso, pero quedará deshabilidado
-            $table->string("Foto");*/
+            /*Crearé el dato de foto, por si lo llegara a ocupar despues en el curso, pero quedará deshabilidado*/
+            $table->string("Foto");
             $table->timestamps();
 
             $table->foreign('categoria_id')->references('id')->on('categorias');

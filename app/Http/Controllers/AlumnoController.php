@@ -63,15 +63,14 @@ class AlumnoController extends Controller
 
         $alumno = request()->except('_token');
 
-        /* if($request->hasFile('Foto')){
-             $datosAlumno['Foto']=$request->file('Foto')->store('uploads','public');
-         }*/
+        if($request->hasFile('Foto')){
+            $alumno['Foto']=$request->file('Foto')->store('uploads','public');
+         }
 
         Alumno::insert($alumno);
 
         return redirect('alumnos');
     }
-
 
 
     /**

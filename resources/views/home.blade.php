@@ -66,6 +66,7 @@
 
 
                                 <th>Carnet</th>
+                                <th>Photo</th>
                                 <th>Categoria</th>
                                 <th>Firstname</th>
                                 <th>Secondname</th>
@@ -85,6 +86,9 @@
 
 
                                     <td>{{ $alumno->Carnet }}</td>
+                                    <td>
+                                        <img src="{{ asset('storage').'/'.$alumno->Foto}}" alt="" style="width: 125px; height: 135px">
+                                    </td>-->
                                     <td>{{ $alumno->categoria->Description }}</td>
                                     <td>{{ $alumno->FirstName }}</td>
                                     <td>{{ $alumno->SecondName }}</td>

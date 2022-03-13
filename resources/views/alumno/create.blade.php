@@ -152,6 +152,14 @@
                             </div>
                         </div>
 
+                        <div class="col-12">
+                            <div class="form-group">
+                                {{ Form::label('Foto') }}
+                                {{ Form::file('Foto', $alumno->Foto, ['class' => 'form-control' . ($errors->has('Foto') ? ' is-invalid' : ''), 'placeholder' => 'Foto']) }}
+                                {!! $errors->first('Foto', '<div class="invalid-feedback">:message</div>') !!}
+                            </div>
+                        </div>
+
                         <div class="box box-info padding-1">
                             <div class="box-body">
 
