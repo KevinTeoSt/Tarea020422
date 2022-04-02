@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Alumno extends Model
 {
-    
+
     static $rules = [
 		'Carnet' => 'required',
 		'categoria_id' => 'required',
@@ -57,6 +57,6 @@ class Alumno extends Model
     {
         return $this->hasOne('App\Models\Categoria', 'id', 'categoria_id');
     }
-    
+
 
 }

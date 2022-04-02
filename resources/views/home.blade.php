@@ -9,7 +9,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
     <script>
         $(document).ready(function () {
             $('#example').DataTable();
@@ -66,7 +68,7 @@
 
 
                                 <th>Carnet</th>
-                                <th>Photo</th>
+                               <!-- <th>Photo</th>-->
                                 <th>Categoria</th>
                                 <th>Firstname</th>
                                 <th>Secondname</th>
@@ -86,9 +88,10 @@
 
 
                                     <td>{{ $alumno->Carnet }}</td>
-                                    <td>
+                                  <!--  <td>
                                         <img src="{{ asset('storage').'/'.$alumno->Foto}}" alt="" style="width: 125px; height: 135px">
-                                    </td>-->
+                                    </td>
+                                    -->
                                     <td>{{ $alumno->categoria->Description }}</td>
                                     <td>{{ $alumno->FirstName }}</td>
                                     <td>{{ $alumno->SecondName }}</td>
@@ -99,15 +102,19 @@
                                 <!--   <td>{{ $alumno->Dpi }}</td>-->
                                     <td>{{ $alumno->Cel }}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-success" href="{{ route('alumnos.edit',$alumno->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                        <a class="btn material-icons" href="{{ route('alumnos.edit',$alumno->id) }}"><i class="fa fa-fw fa-edit"></i> edit</a>
 
                                     </td>
                                     <td>
                                         <form action="{{ route('alumnos.destroy',$alumno->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+
+
+                                            <button type="submit" class="btn material-icons" style="color: red">delete</button>
+
                                         </form>
+
                                     </td>
                                 </tr>
                             @endforeach

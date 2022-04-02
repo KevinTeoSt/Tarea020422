@@ -59,17 +59,68 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Alumno::$rules);
+        /*$data =  request()->validate(Alumno::$rules);*/
+        $data = request()->validate([
+            'Carnet' => 'required',
+            'categoria_id' => 'required',
+            'FirstName' => 'required',
+            'SecondName' => 'required',
+            'LastName' => 'required',
+            'DateOfBirth' => 'required',
+            'Address' => 'required',
+            'Email' => 'required',
+            'Dpi' => 'required',
+            'Cel' => 'required',
+        ], [
+            'Carnet.required' => 'No olvides llenar este campo',
+            'categoria_id.required' => 'No olvides llenar este campo',
+            'FirstName.required' => 'No olvides llenar este campo',
+            'SecondName.required' => 'No olvides llenar este campo',
+            'LastName.required' => 'No olvides llenar este campo',
+            'DateOfBirth.required' => 'No olvides llenar este campo',
+            'Address.required' => 'No olvides llenar este campo',
+            'Email.required' => 'No olvides llenar este campo',
+            'Dpi.required' => 'No olvides llenar este campo',
+            'Cel.required' => 'No olvides llenar este campo',
+        ]);
+
 
         $alumno = request()->except('_token');
-
+/*
         if($request->hasFile('Foto')){
             $alumno['Foto']=$request->file('Foto')->store('uploads','public');
          }
+*/
+        try {
+           /* Alumno::insert($alumno);*/
+            Alumno::insert([
+                'Carnet' => $data['Carnet'],
+                'categoria_id' => $data['categoria_id'],
+                'FirstName' => $data['FirstName'],
+                'SecondName' => $data['SecondName'],
+                'LastName' => $data['LastName'],
+                'DateOfBirth' => $data['DateOfBirth'],
+                'Address' => $data['Address'],
+                'Email' => $data['Email'],
+                'Dpi' => $data['Dpi'],
+                'Cel' => $data['Cel'],
+            ]);
+        } catch (\Exception $exception) {
+            $message=$exception->getMessage();
+            $tipoError=" Excepción General del Sistema ";
+            return view('exceptions.exceptions', compact('message', 'tipoError'));
+        }catch (QueryException $queryException){
+            $message= $queryException->getMessage();
+            $tipoError=" Excepción de Base de Datos ";
+            return view('errors.404', compact('message', 'tipoError'));
+        }catch (ModelNotFoundException $modelNotFoundException){
+            $message=$modelNotFoundException->getMessage();
+            $tipoError=" Excepción en el Servidor ";
+            return view('errors.404', compact('message', 'tipoError'));
+        }
 
-        Alumno::insert($alumno);
 
-        return redirect('alumnos');
+        return redirect('alumnos')->with('success', 'Alumno Agregado correctamente');
     }
 
 
@@ -128,7 +179,17 @@ class AlumnoController extends Controller
      */
     public function destroy($id)
     {
-        $alumno = Alumno::find($id)->delete();
+        try{
+            $alumno = Alumno::find($id)->delete();
+        }catch (\Exception $exception) {
+            $message=$exception->getMessage();
+            $tipoError=" Excepción General del Sistema ";
+            return view('exceptions.exceptions', compact('message', 'tipoError'));
+        }catch (QueryException $queryException){
+            $message= $queryException->getMessage();
+            $tipoError=" Excepción de Base de Datos ";
+            return view('errors.404', compact('message', 'tipoError'));
+        }
 
         return redirect()->route('alumnos.index')->with('success', 'Alumno deleted successfully');
     }
